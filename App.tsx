@@ -1,11 +1,12 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { NavigationContainer } from '@react-navigation/native'
+import MainTab from './src/navigation/MainTab'
 
 const App = () => {
   return (
-    <View>
-      <Text>Hello word</Text> 
-    </View>
+    <NavigationContainer>
+      <MainTab />
+    </NavigationContainer>
   )
 }
 
