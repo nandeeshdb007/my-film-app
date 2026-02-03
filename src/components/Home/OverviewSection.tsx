@@ -5,7 +5,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import COLORS from '../../constants/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
-import { Color } from 'react-native/types_generated/Libraries/Animated/AnimatedExports';
 
 
 const OverviewSection = () => {
