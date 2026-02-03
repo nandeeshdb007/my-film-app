@@ -1,5 +1,5 @@
 
-export const TMDB_API_KEY = 'YOUR_TMDB_API_KEY';
+export const TMDB_API_KEY = '5a2b19a396a637a2fb9806e0e8748b42';
 
 export const TMDB_BASE_URL = 'https://api.themoviedb.org/3';
 export const TMDB_IMAGE_BASE_URL = 'https://image.tmdb.org/t/p';
@@ -25,7 +25,6 @@ export const IMAGE_SIZES = {
   },
 };
 
-// Helper to construct full image URL
 export const getImageUrl = (
   path: string | null,
   size: string = 'w500'
