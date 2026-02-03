@@ -15,6 +15,7 @@ export const usePopularMovies = (): UsePopularMoviesReturn => {
       isRefresh ? setRefreshing(true) : setLoading(true);
 
       const res = await getPopularMovies(pageNumber);
+      console.log(res)
 
       setMovies(prev =>
         isRefresh ? res.results : [...prev, ...res.results]
