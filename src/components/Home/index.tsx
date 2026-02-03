@@ -22,6 +22,28 @@ const Home = () => {
           horizontal
           />
         </View>
+        <View style={{marginBottom: 10}} >
+          <SectionHeader title='New Realeases'/>
+          <FlatList
+          data={movies}
+          renderItem={({item})=>(
+
+            <MovieCard image={item.image} title={item.title} genre={item.genre} />
+          )}
+          horizontal
+          />
+        </View>
+        <View style={{marginBottom: 10}} >
+          <SectionHeader title='International Picks'/>
+          <FlatList
+          data={movies}
+          renderItem={({item})=>(
+
+            <MovieCard image={item.image} title={item.title} genre={item.genre} />
+          )}
+          horizontal
+          />
+        </View>
 
       </View>
     </ScrollView>
