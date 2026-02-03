@@ -47,7 +47,7 @@ const OverviewSection = () => {
                  <Ionicons name={'play'} size={28} color={COLORS.text} />
                </TouchableOpacity>
             </View>
-            <Text style={{color: COLORS.text}}>2025 | Monster | Horror</Text>
+            <Text style={{color:"gray"}}>2025 | Monster | Horror</Text>
         </LinearGradient>
       </View>
     </View>
