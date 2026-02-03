@@ -21,3 +21,17 @@ export interface MovieDetailsProps {
   route: { params: { movie: Movie } }
   navigation: any
 }
+
+export interface UsePopularMoviesState {
+    movies: Movie[];
+    loading: boolean;
+    refreshing: boolean;
+    error: string | null;
+    currentPage: number;
+    hasMore: boolean;
+}
+
+export interface UsePopularMoviesReturn extends UsePopularMoviesState {
+    loadMore: () => void;
+    refresh: () => void;
+}
