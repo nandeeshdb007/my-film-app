@@ -1,11 +1,5 @@
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Image,
-} from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { hs, ms, vs } from '../../utils/screen-dimensions';
 import COLORS from '../../constants/colors';
 import { getImageUrl, IMAGE_SIZES } from '../../config';
