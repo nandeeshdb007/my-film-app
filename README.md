@@ -61,12 +61,6 @@ Run on Android:
 npm run android
 ```
 
-Run on iOS:
-
-```bash
-npm run ios
-```
-
 ## Project Structure
 
 The source code is located in the `src` directory:
