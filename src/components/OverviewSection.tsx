@@ -32,9 +32,6 @@ const OverviewSection = () => {
                                 </Text>
                             </View>
                         </View>
-                        <TouchableOpacity activeOpacity={0.8} style={styles.searchWrapper}>
-                            <Ionicons name={'search'} size={20} color={COLORS.text} />
-                        </TouchableOpacity>
                     </View>
                 </SafeAreaView>
                 <LinearGradient
