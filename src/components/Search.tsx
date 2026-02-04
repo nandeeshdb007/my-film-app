@@ -87,7 +87,7 @@ const Search = () => {
             style={styles.container}
             data={results}
             numColumns={3}
-            keyExtractor={item => item.id.toString()}
+            keyExtractor={item => item.id}
             removeClippedSubviews={false}
             maintainVisibleContentPosition={{ minIndexForVisible: 0 }}
             renderItem={({ item }) => (

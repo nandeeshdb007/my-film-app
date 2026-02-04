@@ -33,7 +33,7 @@ const Home = () => {
             data={movies}
             numColumns={3}
             columnWrapperStyle={styles.row}
-            keyExtractor={(item: any) => item.id.toString()}
+            keyExtractor={(item: any) => item.id}
             onEndReached={hasMore ? loadMore : undefined}
             onEndReachedThreshold={0.5}
             removeClippedSubviews={false}

@@ -62,7 +62,7 @@ const MovieDetailsScreen = () => {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.backdropContainer}>
-        <Image source={{ uri: backdropUrl }} style={styles.backdrop} />
+        <Image source={{ uri: backdropUrl ?? '' }} style={styles.backdrop} />
         <LinearGradient
           colors={['transparent', COLORS.primary]}
           style={styles.gradient}
@@ -77,7 +77,7 @@ const MovieDetailsScreen = () => {
 
       <View style={styles.info}>
         <View style={styles.row}>
-          <Image source={{ uri: posterUrl }} style={styles.poster} />
+          <Image source={{ uri: posterUrl ?? '' }} style={styles.poster} />
           <View style={{ flex: 1, marginLeft: 16 }}>
             <Text style={styles.title}>{details.title}</Text>
             <Text style={styles.sub}>
