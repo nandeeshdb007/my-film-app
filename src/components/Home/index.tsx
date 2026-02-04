@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  FlatList,
-  RefreshControl,
-} from 'react-native';
+import { StyleSheet, View, FlatList, RefreshControl } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import COLORS from '../../constants/colors';
@@ -23,12 +18,11 @@ const Home = () => {
   const { movies, loading, refreshing, error, hasMore, loadMore, refresh } =
     usePopularMovies();
 
-
   if (loading && movies.length === 0) {
     return (
       <View style={styles.container}>
         <OverviewSection />
-        <LoadingIndicator fullScreen text="Loading movies..." />
+        <LoadingIndicator fullScreen text="Loading movies" />
       </View>
     );
   }
@@ -42,6 +36,8 @@ const Home = () => {
       keyExtractor={(item: any) => item.id.toString()}
       onEndReached={hasMore ? loadMore : undefined}
       onEndReachedThreshold={0.5}
+      removeClippedSubviews={false}
+      maintainVisibleContentPosition={{ minIndexForVisible: 0 }}
       refreshControl={
         <RefreshControl
           refreshing={refreshing}
@@ -60,8 +56,10 @@ const Home = () => {
       }
       ListFooterComponent={
         hasMore ? (
-          <LoadingIndicator size="small" text="Loading more..." />
-        ) : null
+          <LoadingIndicator size="small" text="Loading more" />
+        ) : (
+          <View style={{ height: 20 }} />
+        )
       }
       ListEmptyComponent={
         !loading ? (
@@ -72,7 +70,7 @@ const Home = () => {
           />
         ) : null
       }
-      renderItem={({ item }:any) => (
+      renderItem={({ item }: any) => (
         <MovieCard
           id={item.id}
           title={item.title}
