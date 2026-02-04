@@ -7,13 +7,27 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
 
 
-const OverviewSection = () => {
+import { Movie } from '../types/HomeScreen';
+import { getImageUrl, IMAGE_SIZES } from '../constants/api';
+
+interface OverviewSectionProps {
+    movie?: Movie;
+}
+
+const OverviewSection: React.FC<OverviewSectionProps> = ({ movie }) => {
+    const imageUrl = movie
+        ? getImageUrl(movie.backdrop_path || movie.poster_path, IMAGE_SIZES.backdrop.medium)
+        : null;
+
+    const year = movie?.release_date ? new Date(movie.release_date).getFullYear() : 'N/A';
+    const genre = 'Trending';
+
     return (
         <View style={styles.overview}>
             <Image
-                style={styles.overviewImage}
-                source={require('../../assests/images/overview.png')}
-            />
+                    style={styles.overviewImage}
+                    source={{ uri: imageUrl ?? '' }}
+                />
 
             <View style={styles.cover}>
                 <SafeAreaView style={{ flex: 1 }}>
@@ -39,12 +53,14 @@ const OverviewSection = () => {
                     style={styles.blur}
                 >
                     <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-around" }}>
-                        <Text numberOfLines={1} style={{ fontSize: 26, fontWeight: "600", color: COLORS.text, flex: 1 }}>The Sand Man</Text>
+                        <Text numberOfLines={1} style={{ fontSize: 26, fontWeight: "600", color: COLORS.text, flex: 1 }}>
+                            {movie?.title || 'Loading...'}
+                        </Text>
                         <TouchableOpacity activeOpacity={.8} style={styles.playButton}>
                             <Ionicons name={'play'} size={28} color={COLORS.text} />
                         </TouchableOpacity>
                     </View>
-                    <Text style={{ color: "gray" }}>2025 | Monster | Horror</Text>
+                    <Text style={{ color: "gray" }}>{year} | {genre}</Text>
                 </LinearGradient>
             </View>
         </View>

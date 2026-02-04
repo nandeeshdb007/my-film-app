@@ -1,20 +1,21 @@
 import { ImageSourcePropType } from "react-native";
 
-export interface MovieCardProps{
-    image?: ImageSourcePropType | undefined
-    title:string;
-    genre:string
+export interface MovieCardProps {
+  image?: ImageSourcePropType | undefined
+  title: string;
+  genre: string
 }
 
 
-export interface Movie  {
-  id?: string
-  title: string
-  image: string
-  genre?: string
-  description?: string
-  year?: number
-  rating?: number | string
+export interface Movie {
+  id: number;
+  title: string;
+  poster_path: string | null;
+  backdrop_path: string | null;
+  vote_average: number;
+  overview: string;
+  release_date: string;
+  genre_ids: number[];
 }
 
 export interface MovieDetailsProps {
@@ -23,15 +24,16 @@ export interface MovieDetailsProps {
 }
 
 export interface UsePopularMoviesState {
-    movies: Movie[];
-    loading: boolean;
-    refreshing: boolean;
-    error: string | null;
-    currentPage: number;
-    hasMore: boolean;
+  movies: Movie[];
+  trendingMovies: Movie[];
+  loading: boolean;
+  refreshing: boolean;
+  error: string | null;
+  currentPage: number;
+  hasMore: boolean;
 }
 
 export interface UsePopularMoviesReturn extends UsePopularMoviesState {
-    loadMore: () => void;
-    refresh: () => void;
+  loadMore: () => void;
+  refresh: () => void;
 }

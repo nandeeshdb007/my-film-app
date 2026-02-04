@@ -41,9 +41,10 @@ A mobile application built with **React Native** that allows users to browse pop
    npm install
    ```
 
-3. Install iOS dependencies (Mac only):
+3. Add .env:
    ```bash
-   cd ios && bundle exec pod install && cd ..
+  API_URL=""
+   API_KEY=""  
    ```
 
 ### Running the App

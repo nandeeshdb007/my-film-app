@@ -1,9 +1,11 @@
 import axios from 'axios';
+import {API_URL, API_KEY} from "@env"
+
 
 const api = axios.create({
-  baseURL: "https://api.themoviedb.org/3",
+  baseURL: API_URL,
   params: {
-    api_key: "5a2b19a396a637a2fb9806e0e8748b42",
+    api_key: API_KEY,
   },
 });
 
@@ -59,6 +61,7 @@ export const getMovieReviews = async (
   return data;
 };
 
+
 export const getFullMovieData = async (
   movieId: number,
   reviewsPage: number = 1
@@ -70,4 +73,13 @@ export const getFullMovieData = async (
   ]);
 
   return { details, credits, reviews };
+};
+
+export const getTrendingMovies = async (
+  language: string = 'en-US'
+): Promise<any> => {
+  const { data } = await api.get('/trending/movie/day', {
+    params: { language },
+  });
+  return data;
 };

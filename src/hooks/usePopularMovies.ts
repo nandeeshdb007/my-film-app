@@ -1,9 +1,10 @@
 import { useState, useEffect, useCallback } from 'react';
-import { getPopularMovies } from '../services/api';
+import { getPopularMovies, getTrendingMovies } from '../services/api';
 import { Movie, UsePopularMoviesReturn } from '../types/HomeScreen';
 
 export const usePopularMovies = (): UsePopularMoviesReturn => {
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [trendingMovies, setTrendingMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -15,6 +16,11 @@ export const usePopularMovies = (): UsePopularMoviesReturn => {
       isRefresh ? setRefreshing(true) : setLoading(true);
 
       const res = await getPopularMovies(pageNumber);
+
+      if (pageNumber === 1) {
+        const trendingRes = await getTrendingMovies();
+        setTrendingMovies(trendingRes.results);
+      }
       console.log(res)
 
       setMovies(prev =>
@@ -47,6 +53,7 @@ export const usePopularMovies = (): UsePopularMoviesReturn => {
 
   return {
     movies,
+    trendingMovies,
     loading,
     refreshing,
     error,
