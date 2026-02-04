@@ -43,8 +43,9 @@ A mobile application built with **React Native** that allows users to browse pop
 
 3. Add .env:
    ```bash
-  API_URL=""
-   API_KEY=""  
+   API_URL=https://api.themoviedb.org/3
+   API_KEY=your_api_key_here
+
    ```
 
 ### Running the App
