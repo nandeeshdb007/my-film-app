@@ -14,12 +14,12 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
 
 import COLORS from '../constants/colors';
-import { getImageUrl, IMAGE_SIZES } from '../config';
+import { getImageUrl, IMAGE_SIZES } from '../constants/api';
 import { useMovieDetails } from '../hooks/useMovieDetails';
-import LoadingIndicator from '../components/UI/LoadingIndicator';
-import EmptyState from '../components/UI/EmptyState';
-import CastCard from '../components/UI/CastCard';
-import ReviewCard from '../components/UI/ReviewCard';
+import LoadingIndicator from '../components/LoadingIndicator';
+import EmptyState from '../components/EmptyState';
+import CastCard from '../components/CastCard';
+import ReviewCard from '../components/ReviewCard';
 
 const { width } = Dimensions.get('window');
 const BACKDROP_HEIGHT = 280;

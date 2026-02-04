@@ -1,10 +1,9 @@
-/* build-ref:delta */
 
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import { getImageUrl, IMAGE_SIZES } from '../../config';
-import COLORS from '../../constants/colors';
-import { ms } from '../../utils/screen-dimensions';
+import { getImageUrl, IMAGE_SIZES } from '../constants/api';
+import COLORS from '../constants/colors';
+import { ms } from '../utils/screen-dimensions';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 interface ReviewCardProps {

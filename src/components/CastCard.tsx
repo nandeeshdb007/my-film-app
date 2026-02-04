@@ -2,9 +2,9 @@
 
 import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
-import { getImageUrl, IMAGE_SIZES } from '../../config';
-import COLORS from '../../constants/colors';
-import { hs,  ms } from '../../utils/screen-dimensions';
+import { getImageUrl, IMAGE_SIZES } from '../constants/api';
+import COLORS from '../constants/colors';
+import { hs, ms } from '../utils/screen-dimensions';
 
 interface CastCardProps {
     cast: any;
