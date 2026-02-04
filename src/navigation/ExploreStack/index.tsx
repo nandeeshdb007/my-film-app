@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { ExploreStackParamList } from '../../types/navigation'
 import COLORS from '../../constants/colors'
-import ExploreScreen from '../../screens/ExploreScreen'
+import ExploreScreen from '../../screens/SearchScreen'
 import MovieDetailsScreen from '../../screens/MovieDetailsScreen'
 
 const Stack = createNativeStackNavigator<ExploreStackParamList>()

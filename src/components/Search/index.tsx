@@ -9,14 +9,13 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import useSearchMovies from '../../hooks/useSearchMovie';
+import LoadingIndicator from '../UI/LoadingIndicator';
+import EmptyState from '../UI/EmptyState';
+import COLORS from '../../constants/colors';
+import MovieCard from '../UI/MovieCard';
 
-import COLORS from '../constants/colors';
-import MovieCard from '../components/UI/MovieCard';
-import LoadingIndicator from '../components/UI/LoadingIndicator';
-import EmptyState from '../components/UI/EmptyState';
-import useSearchMovies from '../hooks/useSearchMovie';
-
-const SearchScreen = () => {
+const Search = () => {
   const navigation = useNavigation<any>();
 
   const {
@@ -57,9 +56,7 @@ const SearchScreen = () => {
       </View>
 
       {hasSearched && totalResults > 0 && (
-        <Text style={styles.resultCount}>
-          Found {totalResults} movies
-        </Text>
+        <Text style={styles.resultCount}>Found {totalResults} movies</Text>
       )}
     </View>
   );
@@ -90,7 +87,9 @@ const SearchScreen = () => {
       style={styles.container}
       data={results}
       numColumns={3}
-      keyExtractor={(item) => item.id.toString()}
+      keyExtractor={item => item.id.toString()}
+      removeClippedSubviews={false}
+      maintainVisibleContentPosition={{ minIndexForVisible: 0 }}
       renderItem={({ item }) => (
         <MovieCard
           id={item.id}
@@ -105,7 +104,7 @@ const SearchScreen = () => {
       ListHeaderComponent={renderHeader}
       ListEmptyComponent={renderEmpty}
       ListFooterComponent={
-        hasMore && loading ? <LoadingIndicator size="small" /> : null
+  hasMore ? <LoadingIndicator size="small" text="Loading more..." /> : <View style={{ height: 20 }} />
       }
       onEndReached={loadMore}
       onEndReachedThreshold={0.5}
@@ -115,7 +114,7 @@ const SearchScreen = () => {
   );
 };
 
-export default SearchScreen;
+export default Search;
 
 const styles = StyleSheet.create({
   container: {
