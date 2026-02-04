@@ -1,99 +1,164 @@
-import React from 'react'
-import { View, Text, StyleSheet, ScrollView } from 'react-native'
-import COLORS from '../constants/colors'
+import React from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
-const ExploreScreen = () => {
+import COLORS from '../constants/colors';
+import MovieCard from '../components/UI/MovieCard';
+import LoadingIndicator from '../components/UI/LoadingIndicator';
+import EmptyState from '../components/UI/EmptyState';
+import useSearchMovies from '../hooks/useSearchMovie';
+
+const SearchScreen = () => {
+  const navigation = useNavigation<any>();
+
+  const {
+    results,
+    loading,
+    query,
+    hasMore,
+    hasSearched,
+    totalResults,
+    setQuery,
+    loadMore,
+    clearSearch,
+  } = useSearchMovies();
+
+  const goToMovie = (id: number) => {
+    navigation.navigate('MovieDetail', { movieId: id });
+  };
+
+  const renderHeader = () => (
+    <View style={styles.header}>
+      <Text style={styles.title}>Search</Text>
+      <Text style={styles.subtitle}>Find your favorite movies</Text>
+
+      <View style={styles.searchContainer}>
+        <Ionicons name="search" size={20} color="#888" />
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Search movies..."
+          placeholderTextColor="#666"
+          value={query}
+          onChangeText={setQuery}
+        />
+        {query.length > 0 && (
+          <TouchableOpacity onPress={clearSearch}>
+            <Ionicons name="close-circle" size={20} color="#888" />
+          </TouchableOpacity>
+        )}
+      </View>
+
+      {hasSearched && totalResults > 0 && (
+        <Text style={styles.resultCount}>
+          Found {totalResults} movies
+        </Text>
+      )}
+    </View>
+  );
+
+  const renderEmpty = () => {
+    if (loading) return <LoadingIndicator text="Searching..." />;
+
+    if (!hasSearched)
+      return (
+        <EmptyState
+          icon="search"
+          title="Search for Movies"
+          message="Enter a movie name"
+        />
+      );
+
+    return (
+      <EmptyState
+        icon="film-outline"
+        title="No Results"
+        message={`No movies found for "${query}"`}
+      />
+    );
+  };
+
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.title}>Explore</Text>
-        <Text style={styles.subtitle}>Discover movies by category</Text>
-      </View>
+    <FlatList
+      style={styles.container}
+      data={results}
+      numColumns={3}
+      keyExtractor={(item) => item.id.toString()}
+      renderItem={({ item }) => (
+        <MovieCard
+          id={item.id}
+          title={item.title}
+          posterPath={item.poster_path}
+          voteAverage={item.vote_average}
+          releaseDate={item.release_date}
+          onPress={() => goToMovie(item.id)}
+        />
+      )}
+      columnWrapperStyle={results.length ? styles.row : undefined}
+      ListHeaderComponent={renderHeader}
+      ListEmptyComponent={renderEmpty}
+      ListFooterComponent={
+        hasMore && loading ? <LoadingIndicator size="small" /> : null
+      }
+      onEndReached={loadMore}
+      onEndReachedThreshold={0.5}
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={styles.contentContainer}
+    />
+  );
+};
 
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Categories</Text>
-        <View style={styles.categoryGrid}>
-          {['Action', 'Comedy', 'Drama', 'Horror', 'Sci-Fi', 'Romance'].map((category) => (
-            <View key={category} style={styles.categoryCard}>
-              <Text style={styles.categoryText}>{category}</Text>
-            </View>
-          ))}
-        </View>
-      </View>
-
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Featured Collections</Text>
-        <View style={styles.placeholder}>
-          <Text style={styles.placeholderText}>Collection items coming soon</Text>
-        </View>
-      </View>
-    </ScrollView>
-  )
-}
+export default SearchScreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.primary,
   },
+  contentContainer: {
+    flexGrow: 1,
+    paddingBottom: 20,
+  },
   header: {
-    paddingVertical: 30,
-    paddingHorizontal: 20,
+    padding: 16,
     borderBottomWidth: 1,
-    borderBottomColor: COLORS.secondary,
+    borderBottomColor: COLORS.secondary + '20',
   },
   title: {
     fontSize: 32,
     fontWeight: 'bold',
     color: COLORS.text,
-    marginBottom: 5,
   },
   subtitle: {
     fontSize: 16,
     color: '#999',
+    marginBottom: 20,
   },
-  section: {
-    paddingHorizontal: 20,
-    paddingVertical: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: '#1a1a2e',
-  },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: '600',
-    color: COLORS.text,
-    marginBottom: 15,
-  },
-  categoryGrid: {
+  searchContainer: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-  },
-  categoryCard: {
-    width: '48%',
-    paddingVertical: 20,
-    backgroundColor: COLORS.secondary,
-    borderRadius: 8,
-    marginBottom: 10,
-    justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'rgba(255,255,255,0.1)',
+    borderRadius: 12,
+    paddingHorizontal: 12,
   },
-  categoryText: {
-    color: COLORS.primary,
-    fontSize: 14,
-    fontWeight: '600',
+  searchInput: {
+    flex: 1,
+    height: 48,
+    fontSize: 16,
+    color: COLORS.text,
   },
-  placeholder: {
-    height: 150,
-    backgroundColor: '#1a1a2e',
-    borderRadius: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
+  resultCount: {
+    marginTop: 12,
+    color: '#888',
   },
-  placeholderText: {
-    color: '#666',
-    fontSize: 14,
+  row: {
+    paddingHorizontal: 8,
   },
-})
-
-export default ExploreScreen
+});
