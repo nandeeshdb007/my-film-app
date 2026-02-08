@@ -15,7 +15,6 @@ const HomeStack = () => {
                     backgroundColor: COLORS.primary,
                 },
                 headerTintColor: COLORS.secondary,
-                headerTitle: "",
             }}
         >
             <Stack.Screen

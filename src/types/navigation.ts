@@ -7,13 +7,11 @@ export type MainTabParamList = {
 export type HomeStackParamList = {
   Home: undefined;
   MovieDetail: { movieId: number };
-  FullCast: { movieId: number };
 };
 
 export type ExploreStackParamList = {
   Explore: undefined;
   MovieDetail: { movieId: number };
-  FullCast: { movieId: number };
 };
 
 export type ProfileStackParamList = {
