@@ -66,13 +66,13 @@ export const getFullMovieData = async (
   movieId: number,
   reviewsPage: number = 1
 ) => {
-  const [details, credits, reviews] = await Promise.all([
+  const [movieDetails, movieCredits, movieReviews] = await Promise.all([
     getMovieDetails(movieId),
     getMovieCredits(movieId),
     getMovieReviews(movieId, reviewsPage),
   ]);
 
-  return { details, credits, reviews };
+  return { movieDetails, movieCredits, movieReviews };
 };
 
 export const getTrendingMovies = async (
