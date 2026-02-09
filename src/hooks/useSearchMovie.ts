@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import { searchMovies } from '../services/api';
 
-
-
 export const useSearchMovies = () => {
   const [results, setResults] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);

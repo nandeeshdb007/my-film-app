@@ -16,13 +16,13 @@ export const useMovieDetails = (movieId: number) => {
       setLoading(true);
       setError(null);
 
-      const { details, credits, reviews } = await getFullMovieData(movieId);
+      const { movieDetails, movieCredits, movieReviews } = await getFullMovieData(movieId);
 
-      setDetails(details);
-      setCast(credits.cast.slice(0, 20));
-      setReviews(reviews.results);
-      setPage(reviews.page);
-      setHasMoreReviews(reviews.page < reviews.total_pages);
+      setDetails(movieDetails);
+      setCast(movieCredits.cast.slice(0, 20));
+      setReviews(movieReviews.results);
+      setPage(movieReviews.page);
+      setHasMoreReviews(movieReviews.page < movieReviews.total_pages);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load movie');
     } finally {
